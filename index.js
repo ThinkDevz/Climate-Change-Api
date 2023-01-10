@@ -18,6 +18,32 @@ const newspapers = [
         name:'telegraph',
         address: 'https://www.telegraph.co.uk/climate-change',
         base:'https://www.telegraph.co.uk'
+    },
+    {
+        name: 'cityam',
+        address: 'https://www.cityam.com/london-must-become-a-world-leader-on-climate-change-action/',
+        base: ''
+    },
+    {
+        name: 'nyt',
+        address: 'https://www.nytimes.com/international/section/climate',
+        base: '',
+    },
+    {
+        name: 'latimes',
+        address: 'https://www.latimes.com/environment',
+        base: '',
+    },
+    {
+        name: 'smh',
+        address: 'https://www.smh.com.au/environment/climate-change',
+        base: 'https://www.smh.com.au',
+    },
+  
+    {
+        name: 'bbc',
+        address: 'https://www.bbc.co.uk/news/science_and_environment',
+        base: 'https://www.bbc.co.uk',
     }
 ]
 
@@ -31,8 +57,11 @@ newspapers.forEach(newspaper => {
         const html = response.data
         const $ = cheerio.load(html)
         $('a:contains("climate")', html).each(function(){
+
+//            console.log(html)
             const title =$(this).text()
             const url = $(this).attr('href')
+            const image = $(this).attr('data-src')
             articles.push({
                 title,
                 url: newspaper.base+url,
